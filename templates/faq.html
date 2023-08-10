@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lightwalletd Servers</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+    p {
+      text-align: left;
+    }
+    h3 {
+      text-align: center;
+    }
+    #header {
+      text-align: center;
+    }
+    #header a {
+      padding-right: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <div id="header">
+    <a href="/">Server list</a>
+    <a href="/faq">FAQ</a>
+    <a href="/contact">Contact</a>
+    <a href="https://github.com/HashingMachine/lwdfail">Source code</a>
+  </div>
+
+  <h3>What is this site?</h3>
+  <p>This site is a list of lightwalletd servers that includes useful information about them. It helps both users of Zcash wallets and developers alike as it provides information regarding the servers' blockchain, height and whether it is online.
+  <p>This site also helps reduce centralisation by listing all existing lightwalletd servers, allowing users to pick different servers for each Zcash interaction and thus preventing a single server from logging all of their activities, while also avoiding being prevented from using Zcash by offline servers. The list is also available in <a href="/servers.json">JSON format</a> for easy integration in applications that want to automate that.</p>
+  <p>lwd.fail is inspired by <a href="https://monero.fail">monero.fail</a>.</p>
+
+  <h3>What is lightwalletd?</h3>
+  <p><a href="https://github.com/zcash/lightwalletd">Lightwalletd</a> is a daemon that provides a bandwidth-efficient interface to the Zcash blockchain for mobile-friendly Zcash wallets. See the repository for detailed information and setup instructions.</p>
+
+  <h3>I added a server but I can't see it in the list.</h3>
+  <p>The list is updated once every 30 minutes. If the server is not in the list after that time interval and you are sure that you are reading the right list (e.g. mainnet and not testnet or vice-versa), check the offline checkbox and if it still does not appear make sure that you used the right scheme (e.g. https and not http or vice-versa) and the right port (lightwalletd listens on port 9067 by default). If you are sure that everything is correct, it could be that the server was offline on the first status check or that a client-side issue affected reachability, causing the server to be removed. In this case, try adding the server again, and if you are sure that the server is up open an issue on GitHub or <a href="/contact">contact me</a>.</p>
+</body>
+</html>

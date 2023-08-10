@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lightwalletd Servers</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+    input[type="text"] {
+      text-align: center;
+      width: 35%;
+      height: 1.5em;
+    }
+    th, td {
+      padding-right: 3em;
+    }
+    table {
+      margin: 1em auto 0 auto;
+    }
+    #header {
+      text-align: center;
+    }
+    #header a {
+      padding-right: 0.5em;
+    }
+    #addserver, #servers {
+      text-align: center;
+    }
+    .testnet, .testnet-offline, .mainnet, .mainnet-offline {
+      display: none;
+    }
+    #testnet:checked ~ table > tbody > .testnet {
+      display: revert;
+    }
+    #mainnet:checked ~ table > tbody > .mainnet {
+      display: revert;
+    }
+    #testnet:checked ~ #offline:checked ~ table > tbody > .testnet-offline {
+      display: revert;
+    }
+    #mainnet:checked ~ #offline:checked ~ table > tbody > .mainnet-offline {
+      display: revert;
+    }
+  </style>
+</head>
+<body>
+  <div id="header">
+    <a href="/">Server list</a>
+    <a href="/faq">FAQ</a>
+    <a href="/contact">Contact</a>
+    <a href="https://github.com/HashingMachine/lwdfail">Source code</a>
+  </div>
+
+  <div id="addserver">
+    <h2>Add a server</h2>
+    <form action="/add" method="POST">
+      <input type="text" name="address" placeholder="Server URL (https://xxx.tld:9067)"/>
+    </form>
+  </div>
+
+  <div id="servers">
+  <h2>Server list</h2>
+
+  <input type="radio" name="blockchain" id="mainnet" checked/>
+  <label for="mainnet">mainnet</label>
+
+  <input type="radio" name="blockchain" id="testnet"/>
+  <label for="testnet">testnet</label>
+
+  <input type="checkbox" name="offline" id="offline">
+  <label for="offline">offline</label>
+
+  {{ if gt (len .servers) 0 }}
+  <table class="servers">
+    <thead>
+      <tr>
+        <th>Address</th>
+        <th>Blockchain</th>
+        <th>Height</th>
+        <th>Last checked</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+    {{ range $server := .servers }}
+      <tr class="{{ $server.Blockchain }}net{{ if not $server.Up }}-offline{{ end }}">
+      <td>{{$server.Address}}</td>
+      <td>{{$server.Blockchain}}</td>
+      <td>{{$server.Height}}</td>
+      <td>{{$server.LastChecked | timeSince}}</td>
+      <td>{{if $server.Up}}online{{ else }}offline{{ end }}</td>
+      </tr>
+    {{ end }}
+  {{ else }}
+  <p>No known online servers.</p>
+  {{ end }}
+  </div>
+</body>
+</html>
